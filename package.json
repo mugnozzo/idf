@@ -1,0 +1,26 @@
+{
+  "name": "fullstack-demo",
+  "version": "1.0.0",
+  "description": "backend/server.js",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently -n backend,frontend -c red,blue \"npm run backend\" \"npm run frontend\"",
+    "backend": "nodemon backend/server.js",
+    "frontend": "live-server frontend --port=5173",
+    "start": "node backend/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "better-sqlite3": "^12.6.2",
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "live-server": "^1.2.2",
+    "nodemon": "^3.1.14"
+  }
+}
