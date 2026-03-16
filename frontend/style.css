@@ -1,0 +1,11 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.main-sections {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
