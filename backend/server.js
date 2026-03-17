@@ -1,3 +1,4 @@
+require("dotenv").config();
 const path = require("path");
 const express = require('express');
 const cors = require('cors');
@@ -6,9 +7,22 @@ const logger = require('./logger');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const NODE_ENV = process.env.NODE_ENV || "development";
 
-app.use(cors());
+const isProduction = NODE_ENV === "production";
+const serveFrontend =
+  process.env.SERVE_FRONTEND === "true" || NODE_ENV === "production";
+
 app.use(express.json());
+
+// CORS only in development
+if (NODE_ENV === "development") {
+  app.use(
+    cors({
+      origin: "http://127.0.0.1:5173",
+    })
+  );
+}
 
 function now() {
   return Date.now();
@@ -146,7 +160,21 @@ app.use((req, res, next) => {
   next();
 });
 
+// API routes
+app.get("/api/health", (req, res) => {
+  res.json({ ok: true, env: NODE_ENV });
+});
 
+// Static frontend (optional in dev, always in prod)
+if (serveFrontend) {
+  const frontendPath = path.join(__dirname, "../frontend");
+
+  app.use(express.static(frontendPath));
+
+  app.get(/^(?!\/api).*/, (req, res) => {
+    res.sendFile(path.join(frontendPath, "index.html"));
+  });
+}
 
 app.get('/api/types', (req, res, next) => {
   try {
@@ -479,12 +507,6 @@ app.delete('/api/elements/:id/tags/:tagId', (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
-
-app.use(express.static(path.join(__dirname, "../frontend")));
-
-app.get(/^\/(?!api).*/, (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
 app.get('/api/logs', (req, res, next) => {
