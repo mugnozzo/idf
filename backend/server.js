@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require('express');
 const cors = require('cors');
 const db = require('./db');
@@ -144,6 +145,8 @@ app.use((req, res, next) => {
   });
   next();
 });
+
+
 
 app.get('/api/types', (req, res, next) => {
   try {
@@ -476,6 +479,12 @@ app.delete('/api/elements/:id/tags/:tagId', (req, res, next) => {
   } catch (error) {
     next(error);
   }
+});
+
+app.use(express.static(path.join(__dirname, "../frontend")));
+
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
 app.get('/api/logs', (req, res, next) => {
