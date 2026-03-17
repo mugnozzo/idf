@@ -1,4 +1,4 @@
-tmp/
+.env
 node_modules/
 database/*.sqlite
 backend/logs/*.log
