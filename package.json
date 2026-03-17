@@ -1,8 +1,7 @@
 {
-  "name": "fullstack-demo",
-  "version": "1.0.0",
+  "name": "idf",
+  "version": "0.1.0",
   "description": "backend/server.js",
-  "main": "index.js",
   "scripts": {
     "db:init": "node init-db.js",
     "db:reset": "node reset-db.js",
@@ -14,11 +13,12 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "GPLv3",
   "type": "commonjs",
   "dependencies": {
     "better-sqlite3": "^12.6.2",
     "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
     "express": "^5.2.1"
   },
   "devDependencies": {
