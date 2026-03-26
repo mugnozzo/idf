@@ -47,15 +47,15 @@ postElementsButton.addEventListener("click", function() {
     .then(data => {
       console.log(data);
       result.innerHTML = "";
-      const table = document.createElement("table");
+      const div = document.createElement("div");
       const tr = document.createElement("tr");
       for (const field in data) {
         const td = document.createElement("td");
         td.innerHTML = data[field];
         tr.appendChild(td);
       }
-      table.appendChild(tr);
-      result.appendChild(table);
+      div.appendChild(tr);
+      result.appendChild(div);
       listsClick();
     })
     .catch(error => console.error(error));

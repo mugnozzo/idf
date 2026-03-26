@@ -300,7 +300,7 @@ app.get('/api/elements', (req, res, next) => {
       FROM elements e
       INNER JOIN types ty ON ty.id = e.type
       INNER JOIN statuses st ON st.id = e.status
-      ORDER BY e.id ASC
+      ORDER BY e.id DESC
     `).all();
 
     res.json(rows);
