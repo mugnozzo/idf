@@ -1,53 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Users</title>
-    <link rel="icon" href="data:,"/>
-    <link rel="stylesheet" href="./style.css"/>
-    <script src="api.js" defer></script>
-    <script src="main.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IDF Manager</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./api.js" defer></script>
+    <script src="./main.js" defer></script>
   </head>
   <body>
-    <main>
-    <h1>IDF manager</h1>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Personal system</p>
+          <h1>IDF Manager</h1>
+          <p class="subtitle">A calmer interface for collecting and browsing your elements.</p>
+        </div>
 
-      <div class="main-sections">
+        <div class="topbar-actions">
+          <button id="refresh-button" class="secondary-button" type="button">Refresh</button>
+        </div>
+      </header>
 
-        <section id="elements-section">
-          <h2>Post</br>Elements</h2>
-          <input id="post-elements-name" placeholder="name" type="text" /><br/>
-          <input id="post-elements-type" placeholder="type" type="number" min="1" /><br/>
-          <input id="post-elements-status" placeholder="status" type="number" min="1" /><br/>
-          <button id="post-elements-button">Post element</button>
-          <div id="post-elements-result"></div>
-          <button id="get-elements-button" class="get-button" data-endpoint="elements" data-result="get-elements-result">Get elements</button>
-          <div id="get-elements-result"></div>
+      <section id="global-feedback" class="global-feedback hidden" aria-live="polite"></section>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Create element</h2>
+              <p>Fast capture with meaningful fields.</p>
+            </div>
+
+            <form id="create-element-form" class="stacked-form">
+              <label for="element-name">Name</label>
+              <input
+                id="element-name"
+                name="name"
+                type="text"
+                placeholder="Write a title or short description"
+                maxlength="255"
+                required
+              />
+
+              <label for="element-type">Type</label>
+              <select id="element-type" name="type" required></select>
+
+              <label for="element-status">Status</label>
+              <select id="element-status" name="status" required></select>
+
+              <label for="element-tags">Tags</label>
+              <select id="element-tags" name="tags" multiple size="6"></select>
+              <p class="field-help">Hold Ctrl or Cmd to select multiple tags.</p>
+
+              <button id="create-element-button" type="submit">Create element</button>
+            </form>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Filters</h2>
+              <p>Reduce noise and browse faster.</p>
+            </div>
+
+            <form id="filters-form" class="stacked-form">
+              <label for="search-input">Search</label>
+              <input
+                id="search-input"
+                name="search"
+                type="search"
+                placeholder="Search by name"
+                autocomplete="off"
+              />
+
+              <label for="filter-type">Type</label>
+              <select id="filter-type" name="filter-type">
+                <option value="">All types</option>
+              </select>
+
+              <label for="filter-status">Status</label>
+              <select id="filter-status" name="filter-status">
+                <option value="">All statuses</option>
+              </select>
+
+              <label for="filter-tag">Tag</label>
+              <select id="filter-tag" name="filter-tag">
+                <option value="">All tags</option>
+              </select>
+
+              <button id="clear-filters-button" class="secondary-button" type="button">Clear filters</button>
+            </form>
+          </section>
+        </aside>
+
+        <section class="content">
+          <div class="content-toolbar">
+            <div>
+              <h2>Elements</h2>
+              <p id="results-summary" class="muted">Loading…</p>
+            </div>
+          </div>
+
+          <div id="elements-list" class="cards" aria-live="polite"></div>
         </section>
-
-        <section id="get-types-section">
-          <h2>Types</h2>
-          <button id="get-types-button" class="get-button" data-endpoint="types" data-result="get-types-result">Get</button>
-          <div id="get-types-result"></div>
-        </section>
-
-        <section id="get-statuses-section">
-          <h2>Statuses</h2>
-          <button id="get-statuses-button" class="get-button" data-endpoint="statuses" data-result="get-statuses-result">Get</button>
-          <div id="get-statuses-result"></div>
-        </section>
-
-        <section id="get-tags-section">
-          <h2>tags</h2>
-          <button id="get-tags-button" class="get-button" data-endpoint="tags" data-result="get-tags-result">Get</button>
-          <div id="get-tags-result"></div>
-        </section>
-
-        <section id="get-elements-section">
-          <h2>Get</br>Elements</h2>
-          <button id="get-elements-button" class="get-button" data-endpoint="elements" data-result="get-elements-result">Get elements</button>
-          <div id="get-elements-result"></div>
-        </section>
-
       </div>
     </main>
   </body>
