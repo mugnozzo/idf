@@ -1,6 +1,6 @@
-# IDF
+# IDF - Il Da Farsi
 
-IDF is a sort of second brain, but revisited to fit my needs.
+IDF stands for "Il Da Farsi" (roughly translated into English: "The ToDo Stuff") and is a sort of second brain, but revisited to fit my needs.
 
 ## Status
 The backend is at a stable, functioning version.
